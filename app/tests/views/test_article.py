@@ -30,4 +30,6 @@ def test_get_results_flask_paginate(app, client, articles):
 
 
 def test_get_results_flask_resty(app, client, articles):
-    pass
+    articles(40)
+    resp = client.get("/articles_flask_resty?page=0")
+    assert len(json.loads(resp.data)["data"]) == 5

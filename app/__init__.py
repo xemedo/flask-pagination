@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_restful import Api
+from flask_restful import Api as restful_api
+from flask_resty import Api as resty_api
 from flask_rest_paginate import Pagination
 
 app = Flask(__name__)
@@ -23,10 +24,17 @@ def create_app():
         PaginationSQLAlchemyView,
     )
 
-    api = Api(app)
+    # Flask Restful
+    api = restful_api(app)
     api.add_resource(ArticleCreateView, "/articles")
     api.add_resource(PaginationSQLAlchemyView, "/articles_alchemy")
     api.add_resource(PaginationFlaskPaginateView, "/articles_flask_paginate")
+
+    # Flask Resty
+    from app.views.article import PaginationFlaskResty
+
+    api2 = resty_api(app)
+    api2.add_resource("/articles_flask_resty", PaginationFlaskResty, PaginationFlaskResty)
 
     return app
 

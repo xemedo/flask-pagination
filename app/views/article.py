@@ -1,6 +1,7 @@
 from marshmallow import ValidationError
 from flask_restful import Resource
 from flask import request
+from flask_resty import GenericModelView, PagePagination
 
 from app.schemas.article import ArticleSchema
 from app import db, pagination
@@ -39,3 +40,12 @@ class PaginationFlaskPaginateView(Resource):
     def get(self):
         res = pagination.paginate(Article, ArticleSchema(many=True), True)
         return res, 200
+
+class PaginationFlaskResty(GenericModelView):
+    model = Article
+    schema = ArticleSchema(many=True)
+    pagination = PagePagination(page_size=5)
+
+    def get(self):
+        return self.list()
+
