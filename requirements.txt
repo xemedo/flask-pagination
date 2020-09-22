@@ -30,3 +30,5 @@ SQLAlchemy-Utils==0.36.8
 toml==0.10.1
 Werkzeug==1.0.1
 zipp==3.1.0
+flask-resty==1.4.0
+flask-rest-paginate==0.1.5
