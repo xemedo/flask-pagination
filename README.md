@@ -1,2 +1,2 @@
 # flask-pagination
-Flask application that demonstrates different pagination approaches for REST.
+Flask application that demonstrates different pagination approaches for REST services.
